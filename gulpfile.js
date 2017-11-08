@@ -26,7 +26,7 @@ const gulp          = require('gulp'),
       jsSrc = folder.src + '/*/assets/js/app.js',
       commonSrc = folder.src + 'common/';
 
-const PORT = 8888;
+const PORT = 8222;
 
 /**
  * Compress Images
@@ -45,7 +45,6 @@ gulp.task('images', () => {
  * SCSS / CSS
  */
 gulp.task('scss', () => {
-
   var onError = function(err) {
     notify.onError({
       title:    "CSS Error",
@@ -170,16 +169,18 @@ gulp.task('serve', function() {
 /**
  * Runner
  */
-gulp.task('run', ['images', 'hbs', 'scss', 'jquery', 'js', 'jshint', 'serve']);
+gulp.task('run',
+['images', 'hbs', 'scss', 'jquery', 'js', 'jshint', 'serve']
+);
 
 /**
  * Watcher
  */
 gulp.task('watch', function() {
-  gulp.watch(folder.src + 'assets/images/**/*', ['images']);
-  gulp.watch(folder.src + 'assets/css/**/*', ['scss']);
-  gulp.watch(folder.src + 'assets/js/**/*', ['js']);
-  gulp.watch(folder.src + '**/*', ['hbs']);
+  gulp.watch(folder.src + '**/*', ['images'])
+  gulp.watch(folder.src + '**/*', ['scss'])
+  gulp.watch(folder.src + '**/*', ['js'])
+  gulp.watch(folder.src + '**/*', ['hbs'])
   gulp.watch(folder.src + '**/*.html', ['serve'], function (file) {
     server.notify.apply(server, [file]);
   });
